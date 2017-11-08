@@ -4,16 +4,20 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import app.suk.pramhathai.rmutsvservice.MainActivity;
 import app.suk.pramhathai.rmutsvservice.R;
 import app.suk.pramhathai.rmutsvservice.utility.MyAlert;
+import app.suk.pramhathai.rmutsvservice.utility.MyConstant;
+import app.suk.pramhathai.rmutsvservice.utility.UploadNewUser;
 
 /**
  * Created by DR-PC61059 on 7/11/2560.
@@ -95,12 +99,43 @@ public class RegisterFragment extends Fragment{
 
                 } else {
 //                    Choosed Choice
-
+                    uploadUserToSever();
 
                 }
 
+
             }   // onClick
         });
+    }
+
+    private void uploadUserToSever() {
+
+        String tag = "8novV1";
+        try {
+
+            MyConstant myConstant = new MyConstant();
+            UploadNewUser uploadNewUser = new UploadNewUser(getActivity());
+            uploadNewUser.execute(nameString, categoryString,
+                    userString, passwordString, myConstant.getUrlPostData());
+            String result = uploadNewUser.get();
+            Log.d(tag, "Result ==>" + result);
+
+            if (Boolean.parseBoolean(result)) {
+                getActivity().getSupportFragmentManager().popBackStack();
+                Toast.makeText(getActivity(),
+                        "Success UpDate User", Toast.LENGTH_SHORT).show();
+            } else {
+
+                Toast.makeText(getActivity(),
+                        "Success UpDate User", Toast.LENGTH_SHORT).show();
+            }
+
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     private void toolbarController() {
