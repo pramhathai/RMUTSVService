@@ -6,9 +6,9 @@ package app.suk.pramhathai.rmutsvservice.utility;
 
 public class MyConstant {
 
-    private String urlPostData = "http://androidthai.in.th/rmuts/addDataDee.php";
+    private String urlPostData = "http://androidthai.in.th/rmuts/addDataMaster.php";
 
-    private String urlGatAllUser = "http://androidthai.in.th/rmuts/getAllDataDee.php";
+    private String urlGatAllUser = "http://androidthai.in.th/rmuts/getAllDataMaster.php";
 
     public String getUrlGatAllUser() {
         return urlGatAllUser;
